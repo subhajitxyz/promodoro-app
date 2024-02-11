@@ -17,8 +17,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int focusTime = 25;
   bool isRunning = false;
-  Duration remainingTime = const Duration(seconds: 10);
-  // Duration remainingTime = const Duration(minutes: 25);
+  // Duration remainingTime = const Duration(seconds: 10);
+  Duration remainingTime = const Duration(minutes: 25);
   Timer? timer;
   int breakTime = 5;
 
