@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:pomodoro/breakpage.dart';
 import 'package:wheel_chooser/wheel_chooser.dart';
@@ -14,7 +17,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int focusTime = 25;
   bool isRunning = false;
-  Duration remainingTime = const Duration(minutes: 25);
+  Duration remainingTime = const Duration(seconds: 10);
+  // Duration remainingTime = const Duration(minutes: 25);
   Timer? timer;
   int breakTime = 5;
 
@@ -35,8 +39,9 @@ class _HomePageState extends State<HomePage> {
       // ),
       backgroundColor: Colors.red,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const SizedBox(height: 40),
           // focus time selector
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -187,7 +192,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
 
-          const SizedBox(height: 50),
+          const SizedBox(height: 10),
 
           // timer
           Text(
@@ -214,7 +219,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
-          const SizedBox(height: 70),
+          const SizedBox(height: 40),
 
           // buttons
           GestureDetector(
@@ -230,16 +235,34 @@ class _HomePageState extends State<HomePage> {
               isRunning = true;
               timer = Timer.periodic(
                 const Duration(seconds: 1),
-                (timer) {
+                (timer) async {
+                  if (remainingTime.inSeconds == 6) {
+                    startCountDown();
+                  }
                   if (remainingTime.inSeconds == 0) {
                     timer.cancel();
                     isRunning = false;
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return BreakPage(
-                        breakTimeArg: breakTime,
-                      );
-                    }));
+                    bool? isBreak = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const MyAlertDialog();
+                      },
+                    );
+                    if (isBreak == null || isBreak == false) {
+                      remainingTime = Duration(minutes: focusTime);
+                      setState(() {});
+                      return;
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return BreakPage(
+                            breakTimeArg: breakTime,
+                          );
+                        },
+                      ),
+                    );
                     remainingTime = Duration(minutes: focusTime);
                   } else {
                     remainingTime -= const Duration(seconds: 1);
@@ -297,4 +320,77 @@ String durationToTimeString(Duration currentTime) {
       currentTime.inSeconds.remainder(60).toString().padLeft(2, '0');
   String minutes = currentTime.inMinutes.toString().padLeft(2, '0');
   return '$minutes:$seconds';
+}
+
+void startCountDown() {
+  final AudioPlayer audioPlayer = AudioPlayer();
+  Duration duration = const Duration(seconds: 5);
+  audioPlayer.play(AssetSource('timer_end.wav'));
+  Timer(
+    duration,
+    () {
+      audioPlayer.stop();
+    },
+  );
+}
+
+class MyAlertDialog extends StatelessWidget {
+  const MyAlertDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.grey.shade300,
+      title: const Text(
+        'Time is up!',
+        style: TextStyle(
+          fontFamily: 'monospace',
+        ),
+      ),
+      content: const Text(
+        'Do you want to take a break?',
+        style: TextStyle(
+          fontFamily: 'monospace',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.grey.shade600,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+          child: const Text(
+            "Take Break!",
+            style: TextStyle(
+              color: Colors.blue,
+              fontFamily: 'monospace',
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.grey.shade600,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+          ),
+          child: const Text(
+            "Focus Again!",
+            style: TextStyle(
+              color: Colors.blue,
+              fontFamily: 'monospace',
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
