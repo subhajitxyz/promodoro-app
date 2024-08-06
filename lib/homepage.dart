@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
 
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       //   centerTitle: true,
       //   backgroundColor: Colors.red,
       // ),
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.blue,
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -66,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: 200,
                       width: 120,
-                      padding: EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(30),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.red,
@@ -80,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                           focusTime = value;
                         },
                         maxValue: 60,
-                        minValue: 25,
+                        minValue: 1,
                         initValue: 25,
                         step: 5,
                         unSelectTextStyle:
@@ -107,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       elevation: 20,
                       child: Container(
                         width: 120,
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Colors.red,
                           border: Border.all(
@@ -148,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       height: 200,
                       width: 120,
-                      padding: EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(30),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.red,
@@ -253,16 +252,16 @@ class _HomePageState extends State<HomePage> {
                       setState(() {});
                       return;
                     }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return BreakPage(
-                            breakTimeArg: breakTime,
-                          );
-                        },
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) {
+                    //       return BreakPage(
+                    //         breakTimeArg: breakTime,
+                    //       );
+                    //     },
+                    //   ),
+                    // );
                     remainingTime = Duration(minutes: focusTime);
                   } else {
                     remainingTime -= const Duration(seconds: 1);
