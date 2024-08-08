@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       //   centerTitle: true,
       //   backgroundColor: Colors.red,
       // ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blueGrey,
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
