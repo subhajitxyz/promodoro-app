@@ -40,7 +40,7 @@ class _BreakPageState extends State<BreakPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.greenAccent,
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -94,7 +94,7 @@ class _BreakPageState extends State<BreakPage> {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.redAccent,
                       border: Border.all(
                         color: Colors.white,
                         width: 2,

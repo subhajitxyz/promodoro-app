@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       //   centerTitle: true,
       //   backgroundColor: Colors.red,
       // ),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.greenAccent,
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -52,8 +52,8 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
                       fontFamily: 'monospace',
                     ),
                   ),
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(30),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.red,
+                        color: Colors.pinkAccent,
                         border: Border.all(
                           color: Colors.white,
                           width: 2,
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                         width: 120,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.red,
+                          color: Colors.blueGrey,
                           border: Border.all(
                             color: Colors.white,
                             width: 2,
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(30),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.red,
+                        color: Colors.orangeAccent,
                         border: Border.all(
                           color: Colors.white,
                           width: 2,
@@ -181,8 +181,8 @@ class _HomePageState extends State<HomePage> {
                     'Break Time',
                     style: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
                       fontFamily: 'monospace',
                     ),
                   ),
@@ -252,16 +252,16 @@ class _HomePageState extends State<HomePage> {
                       setState(() {});
                       return;
                     }
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) {
-                    //       return BreakPage(
-                    //         breakTimeArg: breakTime,
-                    //       );
-                    //     },
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return BreakPage(
+                            breakTimeArg: breakTime,
+                          );
+                        },
+                      ),
+                    );
                     remainingTime = Duration(minutes: focusTime);
                   } else {
                     remainingTime -= const Duration(seconds: 1);
@@ -279,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: Colors.redAccent,
                   border: Border.all(
                     color: Colors.white,
                     width: 2,
